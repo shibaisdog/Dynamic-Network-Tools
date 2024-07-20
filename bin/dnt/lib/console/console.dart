@@ -9,6 +9,6 @@ void console(int max,int index,String where,String message) {
   for (int i = 0; i <= max - index - 1; i++) {
     _ += ' ';
   }
-  _ += '] ${ansi.fg_bright_red}${index / max * 100}% ${ansi.reset}| ${ansi.fg_yellow}<${where}> : ${ansi.reset}${message}';
+  _ += '] ${ansi.fg_bright_red}${index / max * 100}% ${ansi.reset}| ${ansi.fg_bright_cyan}<${where}> : ${ansi.reset}${message}';
   stdout.write('\r\x1B[2K${_}');
 }

@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'dart:core';
+import 'package:dotenv/dotenv.dart';
+import 'package:dnt/function/env.dart';
 import 'package:dnt/console/console.dart';
 import 'package:dnt/console/ansi.dart' as ansi;
 import 'script/js-compiler.dart' as js_compiler;
@@ -9,6 +11,7 @@ void start() async {
   run = 0;
   Stopwatch stopwatch = Stopwatch();
   stopwatch.start();
+  DotEnv Env = load_env();
   Uri scriptUri = Platform.script;
   String scriptPath = scriptUri.toFilePath();
   String scriptDirectory = Directory(scriptPath).parent.path;
@@ -32,19 +35,19 @@ void start() async {
         await directory.create(recursive: true);
       }
       if (_file.endsWith('.dt')) {
-        console(10,run.toInt(),'compilation',_file+" -> "+__w);
+        console(10,run.toInt(),'compilation',ansi.fg_bright_yellow+_file+ansi.fg_bright_cyan+" -> "+ansi.fg_bright_yellow+__w+ansi.reset);
         String contents = await file.readAsString();
         contents = js_compiler.owo(contents);
         w_file.writeAsStringSync(contents);
       } else {
-        console(10,run.toInt(),'copy',_file+" -> "+__w);
+        console(10,run.toInt(),'copy',ansi.fg_bright_yellow+_file+ansi.fg_bright_cyan+" -> "+ansi.fg_bright_yellow+__w+ansi.reset);
         await file.copy(__w);
       }
     } catch (e) {}
   }
   stopwatch.stop();
-  print('\n${ansi.fg_bright_green}end compilation : ${stopwatch.elapsedMilliseconds}ms${ansi.reset}');
-  app.start(2095);
+  print('\n${ansi.fg_bright_green}end compilation : ${stopwatch.elapsedMilliseconds}ms |  file count : ${Files.length}${ansi.reset}');
+  app.start(int.parse(Env['Server-Port'].toString()));
 }
 List<String> getFiles(String directoryPath) {
   final directory = Directory(directoryPath);

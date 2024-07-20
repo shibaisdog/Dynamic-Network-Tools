@@ -9,17 +9,13 @@ void version(String args) {
     args == "-version" ||
     args == "--version"
   ) {
-    print('DNT [Dynamic-Network-Tools] V.beta-1.0.0 at (Dart ${Platform.version})');
+    print('DNT [Dynamic-Network-Tools] V.beta-1.0.1 at (Dart ${Platform.version})');
   }
 }
 void init(String args) {
   if (
     args == "i" || 
-    args == "init" ||
-    args == "-i" || 
-    args == "--i" ||
-    args == "-init" ||
-    args == "--init"
+    args == "init"
   ) {
     i.init();
   }
@@ -38,8 +34,8 @@ void help() {
   print('\n');
   print('Global options:');
   print('  -v, --version               Show DNT Version.');
-  print('  -i, --init                  Create DNT Program');
   print('\n');
   print('Available commands:');
+  print('  init                        Create DNT Program');
   print('  start                       Start DNT Program');
 }
