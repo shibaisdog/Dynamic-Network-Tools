@@ -1,6 +1,6 @@
 import 'dart:io';
-import '../../__init__/init.dart' as i;
-import '../__vm__/DNT.dart' as dnt;
+import 'package:dnt/__init__/init.dart' as i;
+import 'package:dnt/vm/Script.dart' as dnt;
 import 'file-change-watch.dart' as watch;
 void version(String args) {
   if (

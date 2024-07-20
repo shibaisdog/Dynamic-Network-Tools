@@ -1,4 +1,4 @@
-import '__function__/cli-commands.dart';
+import 'package:dnt/function/cli-commands.dart';
 void main(List<String> args) async {
   if (args.isNotEmpty) {
     for (String f in args) {
@@ -6,8 +6,8 @@ void main(List<String> args) async {
       init(f);
       start(f);
     }
-    print('Unknown Commands');
   } else {
     help();
   }
+  //print('Unknown Commands');
 }

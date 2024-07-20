@@ -1,6 +1,6 @@
 import 'dart:io';
-import '../__vm__/DNT.dart';
-import '../__console__/ansi.dart' as ansi;
+import 'package:dnt/vm/Script.dart';
+import 'package:dnt/console/ansi.dart' as ansi;
 void watch() async {
   Uri scriptUri = Platform.script;
   String scriptPath = scriptUri.toFilePath();
@@ -17,7 +17,7 @@ void watch() async {
       final now = DateTime.now();
       if (!lastModified.containsKey(eventPath) || now.difference(lastModified[eventPath]!) > debounceDuration) {
         lastModified[eventPath] = now;
-        print('${ansi.fg_red}File modified: ${event.path}${ansi.reset}\n');
+        print('${ansi.fg_red}File modified: ${ansi.fg_bright_yellow}${event.path}${ansi.reset}\n');
         start();
       }
     }

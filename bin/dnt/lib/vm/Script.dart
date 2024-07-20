@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:core';
-import '../__console__/console.dart';
-import '../__console__/ansi.dart' as ansi;
+import 'package:dnt/console/console.dart';
+import 'package:dnt/console/ansi.dart' as ansi;
 import 'script/js-compiler.dart' as js_compiler;
 import 'web/App.dart' as app;
 double run = 0;
@@ -25,26 +25,21 @@ void start() async {
       run += 10 / Files.length;
       File file = File(_file);
       console(10,run.toInt(),'read',_file);
-      String contents = await file.readAsString();
-      if (_file.endsWith('.dt')) {
-        console(10,run.toInt(),'compilation',_file);
-        contents = js_compiler.owo(contents);
+      String __w = replaceLastOccurrence(_file,'.dt','.js').replaceAll(directoryPath,'${scriptDirectory}\\dist');
+      File w_file = await file.copy(__w);;
+      Directory directory = w_file.parent;
+      if (!await directory.exists()) {
+        await directory.create(recursive: true);
       }
-      try {
-        String __w = replaceLastOccurrence(_file,'.dt','.js').replaceAll(directoryPath,'${scriptDirectory}\\dist');
-        File w_file = File(__w);
-        Directory directory = w_file.parent;
-        if (!await directory.exists()) {
-          await directory.create(recursive: true);
-        }
-        if (_file.endsWith('.dt')) {
-          console(10,run.toInt(),'compilation',_file+" -> "+__w);
-          w_file.writeAsStringSync(contents);
-        } else {
-          console(10,run.toInt(),'copy',_file+" -> "+__w);
-          await file.copy(__w);
-        }
-      } catch (e) {}
+      if (_file.endsWith('.dt')) {
+        console(10,run.toInt(),'compilation',_file+" -> "+__w);
+        String contents = await file.readAsString();
+        contents = js_compiler.owo(contents);
+        w_file.writeAsStringSync(contents);
+      } else {
+        console(10,run.toInt(),'copy',_file+" -> "+__w);
+        await file.copy(__w);
+      }
     } catch (e) {}
   }
   stopwatch.stop();

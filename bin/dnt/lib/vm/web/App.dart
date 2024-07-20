@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'asset/logger.dart' as logger;
+import '../../console/logger.dart' as logger;
 import 'router/shelf.dart';
 HttpServer? server;
 void start(int port) async {
