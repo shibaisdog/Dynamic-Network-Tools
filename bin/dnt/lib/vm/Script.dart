@@ -46,7 +46,7 @@ void start() async {
     } catch (e) {}
   }
   stopwatch.stop();
-  print('\n${ansi.fg_bright_green}end compilation : ${stopwatch.elapsedMilliseconds}ms |  file count : ${Files.length}${ansi.reset}');
+  print('\n${ansi.fg_bright_green}_____[  end compilation : ${stopwatch.elapsedMilliseconds}ms |  file count : ${Files.length}  ]_____${ansi.reset}');
   app.start(int.parse(Env['Server-Port'].toString()));
 }
 List<String> getFiles(String directoryPath) {
